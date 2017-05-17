@@ -4,6 +4,7 @@
 *.x
 output*
 *.CONN
+*.dSYM
 
 #### joe made this: http://goel.io/joe
 

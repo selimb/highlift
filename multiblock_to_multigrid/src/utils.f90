@@ -107,7 +107,7 @@ subroutine extend
                 if (ITYPE(dir, ax, m).ne.-5) cycle
                 call fetch_face(m, ax, dir, 0, face, length, GET)
                 xavg = sum(face(1,1:length))/length
-                if (xavg.gt.120) cycle
+                if (xavg.gt.148) cycle
                 do n = 1, 3
                     call extend_1(m, ax, dir)
                 end do
@@ -205,7 +205,6 @@ subroutine dup_1(m, ax, dir)
     integer, intent(in) :: m, ax, dir
     integer :: i, j, to_ax, to_dir, reversed, nb, from_dir, l
     real*8, dimension(2) :: offset
-    write(*,*) "duplicating 1", m, ax, dir
     if (ax .eq. 1) then
         do j = 1, nj(m)
             if (dir .eq. 1) then
@@ -323,31 +322,38 @@ subroutine rem_1(m, ax, idx)
     end if
 end subroutine
 
-subroutine resize_blocks(blocks, num, ax)
-    use globals, only: X2D, ni, nj
-    integer, dimension(:) :: blocks
-    integer, intent(in) :: num, ax
-    integer :: num_blocks, n, m, i, j
-    real*8, dimension(2) :: bgn, fin
-    num_blocks = size(blocks)
-    do n = 1, num_blocks
-        m = blocks(n)
-        if (ax .eq. 1) then
-            do j = 1, nj(m)
-                bgn = X2D(:, 1, j, m)
-                fin = X2D(:, ni(m), j, m)
-                X2D(:, 1:num, j, m) = linspace_2d(bgn, fin, num)
-            end do
-            ni(m) = num
-        else
-            do i = 1, ni(m)
-                bgn = X2D(:, i, 1, m)
-                fin = X2D(:, i, nj(m), m)
-                X2D(:, i, 1:num, m) = linspace_2d(bgn, fin, num)
-            end do
-            nj(m) = num
-        end if
+subroutine resize_blocks()
+    use globals, only: nblocks, num_axes, NBL
+    integer :: m, ax
+    do m = 1, nblocks
+        do ax = 1, num_axes
+            if (NBL(ax, m) .eq. 102) then
+                call resize_block(m, 101, ax)
+            end if
+        end do
     end do
+end subroutine
+
+subroutine resize_block(m, num, ax)
+    use globals, only: X2D, ni, nj
+    integer, intent(in) :: m, num, ax
+    integer :: i, j
+    real*8, dimension(2) :: bgn, fin
+    if (ax .eq. 1) then
+        do j = 1, nj(m)
+            bgn = X2D(:, 1, j, m)
+            fin = X2D(:, ni(m), j, m)
+            X2D(:, 1:num, j, m) = linspace_2d(bgn, fin, num)
+        end do
+        ni(m) = num
+    else
+        do i = 1, ni(m)
+            bgn = X2D(:, i, 1, m)
+            fin = X2D(:, i, nj(m), m)
+            X2D(:, i, 1:num, m) = linspace_2d(bgn, fin, num)
+        end do
+        nj(m) = num
+    end if
 end subroutine
 
 function linspace_2d(bgn, fin, num)

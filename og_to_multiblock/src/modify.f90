@@ -34,28 +34,28 @@ program main
     end do
 
     ! Split blocks into smaller chunks
-!   call split_block(15, 2, (/ 101, 201 /), 0, m)
-!   write(*,*) m
-!   do_fix = .true.
-!   do while (do_fix)
-!       do_fix = fix_conn()
-!   end do
-!   call split_block(18, 1, (/ 101, 201 /), 0, m)
-!   write(*,*) m
-!   do_fix = .true.
-!   do while (do_fix)
-!       do_fix = fix_conn()
-!   end do
-!   call split_block(70, 1, (/ 1, 101 /), 0, m)
-!   do_fix = .true.
-!   do while (do_fix)
-!       do_fix = fix_conn()
-!   end do
-!   call split_block(8, 1, (/ 1, 137 /), 0, m)
-!   do_fix = .true.
-!   do while (do_fix)
-!       do_fix = fix_conn()
-!   end do
+    call split_block(15, 2, (/ 101, 201 /), 0, m)
+    write(*,*) m
+    do_fix = .true.
+    do while (do_fix)
+        do_fix = fix_conn()
+    end do
+    call split_block(18, 1, (/ 101, 201 /), 0, m)
+    write(*,*) m
+    do_fix = .true.
+    do while (do_fix)
+        do_fix = fix_conn()
+    end do
+    call split_block(70, 1, (/ 1, 101 /), 0, m)
+    do_fix = .true.
+    do while (do_fix)
+        do_fix = fix_conn()
+    end do
+    call split_block(8, 1, (/ 1, 137 /), 0, m)
+    do_fix = .true.
+    do while (do_fix)
+        do_fix = fix_conn()
+    end do
 
     ! Output
     open(unit=20, form='formatted', file='modded2D.x')

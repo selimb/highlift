@@ -30,77 +30,17 @@ program main
     call output("0")
 
     ! Fix blocks
-    call resize_blocks( &
-        (/ 73, 57, 97, 101, 72, 53, 56, 98, 90, 49, 52, 89, 78, &
-           33, 71, 82, 48, 70 /), &
-        201, 2)
 
-!   call dup_1(6, AXJ, 2)
-!   call dup_1(37, AXI, 1)
-!   call dup_1(52, AXI, 1)
-!   call dup_1(35, AXJ, 2)
-!   call dup_1(34, AXJ, 2)
-!   call sync(9, 1)
-!   call sync(47, 1)
-!   call dup_1(36, AXI, 1)
-!   call sync(47, 3)
-!   call sync(4, 3)
-!   call dup_1(50, AXJ, 1)
-!   call dup_1(78, AXI, 2)
     call dup_propagate(6, AXJ, 2)
     call sync(9, 1)
     call sync(47, 1)
     call sync(47, 3)
     call sync(4, 3)
 
-!   call dup_1(82, AXI, 2)
-!   call dup_1(62, AXJ, 1)
-!   call dup_1(61, AXJ, 1)
-!   call dup_1(60, AXJ, 1)
-!   call dup_1(59, AXJ, 1)
-!   call dup_1(19, AXJ, 2)
-!   call dup_1(38, AXI, 1)
-!   call dup_1(39, AXI, 1)
-!   call dup_1(26, AXJ, 2)
-!   call dup_1(67, AXJ, 1)
-!   call dup_1(68, AXJ, 1)
-!   call dup_1(86, AXI, 1)
-!   call dup_1(97, AXI, 1)
     call dup_propagate(82, AXI, 2)
 
-!   call dup_1(72, AXI, 2)
-!   call dup_1(29, AXI, 2)
-!   call dup_1(28, AXJ, 2)
-!   call dup_1(27, AXJ, 2)
-!   call dup_1(66, AXJ, 1)
-!   call dup_1(40, AXI, 1)
-!   call dup_1(58, AXJ, 1)
-!   call dup_1(20, AXJ, 2)
-!   call dup_1(21, AXJ, 2)
-!   call dup_1(22, AXJ, 2)
-!   call dup_1(23, AXJ, 2)
-!   call dup_1(71, AXI, 1)
     call dup_propagate(72, AXI, 2)
 
-!   call dup_1(90, AXI, 2)
-!   call dup_1(14, AXJ, 2)
-!   call dup_1(13, AXJ, 2)
-!   call dup_1(51, AXJ, 1)
-!   call dup_1(45, AXI, 1)
-!   call sync(1, 44)
-!   call dup_1(44, AXJ, 2)
-!   call sync(1, 45)
-!   call dup_1(76, AXJ, 2)
-!   call dup_1(43, AXJ, 2)
-!   call sync(47, 3)
-!   call sync(8, 3)
-!   call dup_1(42, AXJ, 2)
-!   call dup_1(41, AXJ, 2)
-!   call dup_1(46, AXI, 1)
-!   call dup_1(10, AXJ, 2)
-!   call dup_1(54, AXJ, 1)
-!   call dup_1(55, AXJ, 1)
-!   call dup_1(56, AXI, 1)
     call dup_propagate(90, AXI, 2)
     call sync(1, 44)
     call sync(1, 45)
@@ -108,24 +48,29 @@ program main
     call sync(8, 3)
 
     call grow_blocks(AXJ, 1, 20, 2, &
-        (/44, 1, 9, 11, 12, 49/))
+        (/44, 1, 9, 11, 12, 129, 130, 49, 162/))
     call grow_blocks(AXJ, 1, 14, 2, &
         (/42, 7, 58, 19, 30, 63/))
     call grow_blocks(AXI, 2, 11, 1, &
-        (/75, 84, 85, 95, 101/))
+        (/75, 114, 109, 84, 85, 127, 132, 95, 101, 168/))
     call grow_blocks(AXI, 2, 22, 1, &
-        (/75, 84, 85, 95, 101/))
+        (/75, 114, 109, 84, 85, 127, 132, 95, 101, 168/))
     call grow_blocks(AXI, 2, 11, 1, &
-        (/77, 79, 80, 98/))
+        (/77, 79, 123, 80, 124, 98, 164/))
     call grow_blocks(AXI, 2, 22, 1, &
-        (/77, 79, 80, 98/))
+        (/77, 79, 123, 80, 124, 98, 164/))
 
     call rem_1(34, AXI, 30)
     call rem_1(34, AXI, 28)
+    call merge_2(34, AXI, 2)
     call rem_1(47, AXJ, 30)
     call rem_1(47, AXJ, 28)
+    call merge_2(47, AXJ, 2)
     call rem_1(76, AXI, 30)
     call rem_1(76, AXI, 28)
+    call merge_2(76, AXI, 2)
+
+    call resize_blocks
 
     call extend
 
@@ -154,7 +99,7 @@ program main
     fin = 80
     num = kmax
     open(unit=30, form='formatted', file='modded3D.x')
-    write(30,*), nblocks
+    write(30,*) nblocks
     do m = 1, nblocks
         write(30,*) ni(m), nj(m), num
     end do
