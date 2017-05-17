@@ -1,3 +1,10 @@
+# output files
+
+*.dat
+*.x
+output*
+*.CONN
+
 #### joe made this: http://goel.io/joe
 
 #####=== Fortran ===#####
