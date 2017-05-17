@@ -23,9 +23,9 @@ module conn
 end subroutine
 
 subroutine write_conn(iout, m)
-    use globals, only: IDX, ITYPE, IA, BTYPE, KTYPE, ROT, num_dirs, num_axes
+    use globals, only: ITYPE, IA, BTYPE, KTYPE, ROT, num_dirs, num_axes
     integer, intent(in) :: iout
-    integer :: m, block, a, d, L, ijk
+    integer :: m, a, d, L, ijk
     call validatehand(m, ijk)
     write (iout,501) m, &
         ((ITYPE(d, a, m), BTYPE(d, a, m), &
